@@ -28,9 +28,24 @@ public class Main {
                 });
             });
 
-            int cantidadFormPost = document.getElementsByAttributeValue("method", "post").size();
 
-            int cantidadFormGet = document.getElementsByAttributeValue("method", "get").size();
+            int[] cantidadFormGet = {0};
+
+            document.getElementsByTag("form").forEach(element -> {
+                element.getElementsByAttributeValue("method", "get").forEach(element1 -> {
+                    cantidadFormGet[0]++;
+                });
+            });
+
+            int[] cantidadFormPost = {0};
+
+
+            document.getElementsByTag("form").forEach(element -> {
+                element.getElementsByAttributeValue("method", "post").forEach(element1 -> {
+                    cantidadFormPost[0]++;
+                });
+            });
+
 
             document.getElementsByAttributeValue("type","text");
 
@@ -41,9 +56,9 @@ public class Main {
 
             System.out.println("La cantidad de imagenes contenidad dentro de los parrafos es de: "+ cantidad[0]);
 
-            System.out.println(cantidadFormGet);
+            System.out.println("La cantidad de formularios categorizados por el method get: " + cantidadFormGet[0]);
 
-            System.out.println(cantidadFormPost);
+            System.out.println("La cantidad de formularios categorizados por el method post: " + cantidadFormPost[0]);
 
             System.out.println(document.getElementsByAttributeValue("type","text"));
 
