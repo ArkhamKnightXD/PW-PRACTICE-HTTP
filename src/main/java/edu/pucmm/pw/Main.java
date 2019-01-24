@@ -10,59 +10,44 @@ import org.jsoup.select.Elements;
 public class Main {
     public static void main(String[] args)
     {
-        System.out.println("hola mundo");
 
-        final String url ="https://shares.telegraph.co.uk/indices/summary/index/MCX";
+         String url ="https://shares.telegraph.co.uk/indices/summary/index/MCX";
 
         try {
-            final Document document=Jsoup.connect(url).get(); // comando para establecer la conexion con la url que queremos analizar
+             Document document=Jsoup.connect(url).get(); // comando para establecer la conexion con la url que queremos analizar
 
-
-          // System.out.println(document.outerHtml()); // Este comando nos imprime el codigo html de la pagina completo
-
-            //int lines = document.html().split(System.getProperty("line.separator")).length;
-           // System.out.println(lines);
-
-
-            String textoCompleto2 = document.html();
-
-            String textoCompleto = document.outerHtml();
-
-            document.getElementsByAttribute("POST").size();
-
-            document.getElementsByAttribute("GET").size();
-
-
-
-            int imagenes= document.getElementsByTag("img").size();
+           // String textoCompleto = document.html(); // Este comando nos imprime el texto completo html
 
             int parrafos= document.getElementsByTag("p").size();
 
+            int imagenes= document.getElementsByTag("img").size(); // Este codigo permite contar cuantos elemento hay del tag que uno defina
+
+            int cantidadFormPost = document.getElementsByAttributeValue("method", "post").size();
+
+            int cantidadFormGet = document.getElementsByAttributeValue("method", "get").size();
+
             document.getElementsByAttributeValue("type","text");
 
-            int cantidadElementos = document.getAllElements().size(); // Esto cuenta la cantidad de elementos de la pagina, pero no cuenta body ni expacios en blanco
+            int cantidadElementos = document.getAllElements().size();
 
 
-            System.out.println(textoCompleto);
+           // System.out.println(textoCompleto);
 
             System.out.println(cantidadElementos);
 
-            System.out.println(parrafos); // Este codigo permite contar cuantos elemento hay del tag que uno defina
+            System.out.println(parrafos);
 
             System.out.println(imagenes);
+
+            System.out.println(cantidadFormGet);
+
+            System.out.println(cantidadFormPost);
+
+            System.out.println(document.getElementsByAttributeValue("type","text"));
 
         }catch (Exception ex){
             ex.printStackTrace();
         }
 
-
-
-      /*  Elements ele=p.select("div#reviews");
-        for (Element element: ele)
-        {
-            String img_url=element.select(div.prerendered);
-            System.out.println("img_url");
-
-        }*/
     }
 }
