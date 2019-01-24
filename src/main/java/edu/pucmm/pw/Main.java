@@ -16,11 +16,17 @@ public class Main {
         try {
              Document document=Jsoup.connect(url).get(); // comando para establecer la conexion con la url que queremos analizar
 
-           // String textoCompleto = document.html(); // Este comando nos imprime el texto completo html
-
             int parrafos= document.getElementsByTag("p").size();
 
-            int imagenes= document.getElementsByTag("img").size(); // Este codigo permite contar cuantos elemento hay del tag que uno defina
+            int[] cantidad = {0};
+
+            document.getElementsByTag("p").forEach(element ->
+            { element.getElementsByTag("img").forEach(element1 ->
+            {
+                    cantidad[0]++;
+
+                });
+            });
 
             int cantidadFormPost = document.getElementsByAttributeValue("method", "post").size();
 
@@ -28,16 +34,12 @@ public class Main {
 
             document.getElementsByAttributeValue("type","text");
 
-            int cantidadElementos = document.getAllElements().size();
 
+            System.out.println("La cantidad totales de lineas del recurso son : " + document.html().split("\n").length);
 
-           // System.out.println(textoCompleto);
+            System.out.println("La cantidad total de parrafos <p> que contiene el documento es de: " +parrafos);
 
-            System.out.println(cantidadElementos);
-
-            System.out.println(parrafos);
-
-            System.out.println(imagenes);
+            System.out.println("La cantidad de imagenes contenidad dentro de los parrafos es de: "+ cantidad[0]);
 
             System.out.println(cantidadFormGet);
 
