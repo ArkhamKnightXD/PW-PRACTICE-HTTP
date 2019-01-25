@@ -1,17 +1,15 @@
 package edu.pucmm.pw;
 
 import org.jsoup.Jsoup;
-import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 
 public class Main {
     public static void main(String[] args)
     {
 
-         String url ="https://shares.telegraph.co.uk/indices/summary/index/MCX";
+         String url ="https://www.pabloyglesias.com/obtener-datos-publicos-persona/";
 
         try {
              Document document=Jsoup.connect(url).get(); // comando para establecer la conexion con la url que queremos analizar
@@ -46,8 +44,7 @@ public class Main {
                 });
             });
 
-
-            document.getElementsByAttributeValue("type","text");
+            int cantidaElementos = document.getAllElements().size(); // Creo que este codigo podria ser una opcion para la respuesta A
 
 
             System.out.println("La cantidad totales de lineas del recurso son : " + document.html().split("\n").length);
@@ -60,7 +57,13 @@ public class Main {
 
             System.out.println("La cantidad de formularios categorizados por el method post: " + cantidadFormPost[0]);
 
-            System.out.println(document.getElementsByAttributeValue("type","text"));
+            System.out.println("Los campos del tipo input de cada formulario son los siguientes: ");
+
+            for (Element tiposForm : document.getElementsByTag("form"))
+            {
+                System.out.println(tiposForm);
+            }
+
 
         }catch (Exception ex){
             ex.printStackTrace();
