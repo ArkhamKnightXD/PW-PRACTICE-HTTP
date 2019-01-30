@@ -6,7 +6,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.Connection;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.IOException;
 
 
 public class Main {
@@ -52,11 +51,8 @@ public class Main {
                 });
             });
 
-            int cantidaElementos = document.getAllElements().size(); // Creo que este codigo podria ser una opcion para la respuesta A
 
             //Punto A
-
-
             System.out.println("La cantidad totales de lineas del recurso son : " + document.html().split("\n").length);
 
             System.out.println("La cantidad total de parrafos <p> que contiene el documento es de: " +parrafos);
@@ -76,22 +72,23 @@ public class Main {
                 System.out.println(tiposForm);
             }
 
-            //punto F
+            //Punto F
 
             Connection.Response response = null;
-            Document doc = null;
             Map<String, String> parametros = new HashMap<>();
 
 
                 for (Element element : document.getElementsByTag("form")) {
-                    String absURL = element.absUrl("action");
+                    String URL = element.absUrl("action");
 
                     if (element.attr("method").equals("post")) {
                         parametros.put("asignatura", "practica1");
 
-                        document = Jsoup.connect(absURL)
+
+                        document = Jsoup.connect(URL)
                                 .method(Connection.Method.POST)
                                 .data(parametros)
+                                .header("matricula","20141336")
                                 .post();
 
                         System.out.println(document.outerHtml());
