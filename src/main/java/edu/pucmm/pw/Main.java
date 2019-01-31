@@ -14,12 +14,13 @@ public class Main {
 
          String url ="http://itachi.avathartech.com:4567/opcion2.html";
 
+
         try {
              Document document=Jsoup.connect(url).get(); // comando para establecer la conexion con la url que queremos analizar
 
+            Connection.Response conexion = Jsoup.connect(url).execute();
             //Punto B
             int parrafos= document.getElementsByTag("p").size();
-
 
             //Punto C
             int[] cantidad = {0};
@@ -51,9 +52,12 @@ public class Main {
                 });
             });
 
-
             //Punto A
-            System.out.println("La cantidad totales de lineas del recurso son : " + document.html().split("\n").length);
+
+            String pagina = conexion.body();
+            int cantidadLineas = pagina.split("\n").length;
+
+            System.out.println("La cantidad totales de lineas del recurso son : " + cantidadLineas);
 
             System.out.println("La cantidad total de parrafos <p> que contiene el documento es de: " +parrafos);
 
